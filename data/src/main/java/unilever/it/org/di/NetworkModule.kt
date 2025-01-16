@@ -91,7 +91,7 @@ object NetworkModule {
     fun provideRetrofit(client: OkHttpClient, moshi: Moshi): Retrofit {
         return Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .baseUrl("https://api.openweathermap.org/data/")
+            .baseUrl("https://api.openweathermap.org/data/2.5/")
             .client(client)
             .build()
     }

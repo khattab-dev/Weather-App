@@ -18,7 +18,7 @@ android {
         consumerProguardFiles("consumer-rules.pro")
 
         val properties = Properties()
-        properties.load(project.rootProject.file("local.properties").inputStream())
+        properties.load(project.rootProject.file("gradle.properties").inputStream())
 
         buildConfigField("String","API_KEY", properties.getProperty("API_KEY"))
     }

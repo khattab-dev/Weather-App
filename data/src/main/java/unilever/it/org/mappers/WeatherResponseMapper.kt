@@ -23,6 +23,7 @@ fun CurrentWeatherResponse.toCurrentWeather(): CurrentWeather {
         pressure = main?.pressure ?: 0,
         humidity = main?.humidity ?: 0,
         windSpeed = wind?.speed ?: 0.0,
-        windDegree = wind?.deg ?: 0.0
+        windDegree = wind?.deg ?: 0.0,
+        cityName = name ?: ""
     )
 }

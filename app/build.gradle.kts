@@ -48,7 +48,7 @@ android {
 dependencies {
     implementation(project(":core:navigation"))
     implementation(project(":domain"))
-    implementation(project(":data"))
+    implementation(project(":core:di"))
     implementation(project(":features:home"))
     implementation(project(":features:forecast"))
     implementation(project(":features:search_city"))

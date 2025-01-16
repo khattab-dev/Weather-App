@@ -38,6 +38,7 @@ import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import com.google.android.gms.location.LocationServices
+import unilever.it.org.forecast.components.ForecastInfoCard
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -88,32 +89,7 @@ fun ForecastScreen(
     } else {
         LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
             items(state.forecasts, key = { it.date }) {
-                Card(modifier = Modifier.fillMaxWidth()) {
-                    Row(modifier = Modifier.fillMaxWidth().padding(16.dp), horizontalArrangement = Arrangement.SpaceBetween, verticalAlignment = Alignment.CenterVertically) {
-                        Column(verticalArrangement = Arrangement.Center) {
-                            Text(it.date, fontSize = 20.sp, fontWeight = FontWeight.Bold)
-
-                            Text(
-                                "${it.temperature}°C",
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold
-                            )
-
-                            Text(
-                                it.status,
-                            )
-                        }
-
-                        AsyncImage(
-                            model = it.iconUrl,
-                            contentDescription = null,
-                            modifier = Modifier
-                                .clip(RoundedCornerShape(8.dp))
-                                .size(50.dp)
-                                .background(color = MaterialTheme.colorScheme.secondary),
-                        )
-                    }
-                }
+                ForecastInfoCard(forecast = it)
             }
         }
     }

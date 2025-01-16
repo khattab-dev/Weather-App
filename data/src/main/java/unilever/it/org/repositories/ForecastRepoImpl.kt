@@ -17,20 +17,16 @@ import javax.inject.Inject
 class ForecastRepoImpl @Inject constructor(private val apiService: ApiService): ForecastRepository {
     override suspend fun getForecastData(
         lat: Double?,
-        lon: Double?
+        lon: Double?,
+        name: String?
     ): Result<List<Forecast>, NetworkError> {
         return safeCall<WeatherForecastResponse> {
-            apiService.getWeatherForecast(lat,lon)
+            when (lat == null || lon == null) {
+                true -> apiService.getWeatherForecast(name = name ?: "London")
+                false -> apiService.getWeatherForecast(lat,lon)
+            }
         }.map {
             it?.toForecastList() ?: emptyList()
-        }
-    }
-
-    override suspend fun getForecastData(city: String): Result<List<Forecast>?, NetworkError> {
-        return safeCall<WeatherForecastResponse> {
-            apiService.getWeatherForecast(name = city)
-        }.map {
-            it?.toForecastList()
         }
     }
 }

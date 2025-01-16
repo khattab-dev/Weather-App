@@ -11,15 +11,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import unilever.it.org.domain.models.ScreenEvent
 import unilever.it.org.domain.models.onError
 import unilever.it.org.domain.models.onSuccess
-import unilever.it.org.domain.usecases.GetWeatherForecastByCoordinatesUseCase
+import unilever.it.org.domain.usecases.GetWeatherForecastUseCase
 import javax.inject.Inject
 
 @HiltViewModel
 class ForecastViewModel @Inject constructor(
-    private val getWeatherForecastByCoordinatesUseCase: GetWeatherForecastByCoordinatesUseCase
+    private val getWeatherForecastUseCase: GetWeatherForecastUseCase
 ) :
     ViewModel() {
     private val _state = MutableStateFlow(ForecastState())
@@ -42,7 +41,7 @@ class ForecastViewModel @Inject constructor(
                 it.copy(isLoading = true)
             }
 
-            getWeatherForecastByCoordinatesUseCase.invoke(lat, lon).onSuccess {
+            getWeatherForecastUseCase.invoke(lat, lon).onSuccess {
                 Log.d("rabbit", "getForecastData: ${it?.size}")
                 _state.update { state ->
                     state.copy(forecasts = it)

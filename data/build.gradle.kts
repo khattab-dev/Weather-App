@@ -62,7 +62,10 @@ dependencies {
     implementation(libs.okhttp)
     ksp(libs.moshi.kotlin.codegen)
 
-
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
+
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 }

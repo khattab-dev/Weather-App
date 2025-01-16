@@ -8,24 +8,25 @@ import androidx.compose.ui.graphics.vector.ImageVector
 
 data class NavBarItem<T : Any>(
     val title: String,
-    val icon: ImageVector,
+    val iconImageVector: ImageVector? = null,
+    val iconDrawableRes: Int? = null,
     val route: T
 ) {
     companion object {
         val items = listOf(
             NavBarItem(
                 title = "Home",
-                icon = Icons.Default.Home,
+                iconDrawableRes = R.drawable.weather,
                 route = Routes.Home,
             ),
             NavBarItem(
                 title = "Search",
-                icon = Icons.Default.Search,
+                iconImageVector = Icons.Default.Search,
                 route = Routes.Search,
             ),
             NavBarItem(
                 title = "Forecast",
-                icon = Icons.Default.FavoriteBorder,
+                iconDrawableRes = R.drawable.forecast,
                 route = Routes.Forecast,
             ),
         )

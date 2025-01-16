@@ -3,6 +3,7 @@ package unilever.it.org.domain.models
 import android.health.connect.datatypes.units.Pressure
 
 data class CurrentWeather(
+    val cityName: String,
     val temp: Double,
     val iconUrl: String,
     val weatherStatus: String,

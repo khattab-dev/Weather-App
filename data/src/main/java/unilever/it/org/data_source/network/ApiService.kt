@@ -11,7 +11,7 @@ interface ApiService {
     suspend fun getCurrentWeather(
         @Query("lat") lat: Double? = null,
         @Query("lon") lon: Double? = null,
-        @Query("q") name: String? = if (lat == null || lon == null) "London" else null,
+        @Query("q") name: String? = null,
         @Query("units") units: String = "metric",
     ): Response<CurrentWeatherResponse>
 
@@ -19,7 +19,8 @@ interface ApiService {
     suspend fun getWeatherForecast(
         @Query("lat") lat: Double? = null,
         @Query("lon") lon: Double? = null,
-        @Query("q") name: String? = if (lat == null || lon == null) "London" else null,
+        @Query("q") name: String? = null,
         @Query("units") units: String = "metric",
     ): Response<WeatherForecastResponse>
+
 }

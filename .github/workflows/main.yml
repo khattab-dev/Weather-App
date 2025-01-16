@@ -21,7 +21,7 @@ jobs:
         java-version: '17'
         distribution: 'corretto'
     - name: Build With Gradle
-      run: ./gradlew assembleDebug
+      run: ./gradlew build
     - name: Upload Apk
       uses: actions/upload-artifact@v4.6.0
       with:

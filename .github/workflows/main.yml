@@ -20,11 +20,18 @@ jobs:
       with:
         java-version: '17'
         distribution: 'corretto'
+
+    - name: Run Unit Tests
+      run: ./gradlew test
+      
     - name: Build With Gradle
       run: ./gradlew build
+      if: success() 
+      
     - name: Upload Apk
       uses: actions/upload-artifact@v4.6.0
       with:
         name: app
         path: app/build/outputs/apk/debug/app-debug.apk
+        if: success()
       

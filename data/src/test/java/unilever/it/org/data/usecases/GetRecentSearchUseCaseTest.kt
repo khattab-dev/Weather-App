@@ -10,11 +10,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
-import unilever.it.org.domain.models.CurrentWeather
-import unilever.it.org.domain.models.NetworkError
-import unilever.it.org.domain.models.Result
 import unilever.it.org.domain.usecases.GetRecentSearchUseCase
-import unilever.it.org.repositories.CurrentWeatherRepoImpl
 
 @RunWith(JUnit4::class)
 class GetRecentSearchUseCaseTest {

@@ -12,7 +12,6 @@ import unilever.it.org.domain.models.CurrentWeather
 import unilever.it.org.domain.models.NetworkError
 import unilever.it.org.domain.models.Result
 import unilever.it.org.domain.usecases.GetCurrentWeatherUseCase
-import unilever.it.org.repositories.CurrentWeatherRepoImpl
 
 @RunWith(JUnit4::class)
 class GetCurrentWeatherUseCaseTest {

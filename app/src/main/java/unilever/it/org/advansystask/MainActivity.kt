@@ -4,24 +4,17 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
 import androidx.compose.material3.FilledIconButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Switch
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -78,19 +71,13 @@ class MainActivity : ComponentActivity() {
                             .padding(16.dp)
                     ) {
                         composable<Routes.Home> {
-                            HomeScreen(
-                                navHostController = navController,
-                            )
+                            HomeScreen()
                         }
                         composable<Routes.Forecast> {
-                            ForecastScreenRoot(
-                                navHostController = navController,
-                            )
+                            ForecastScreenRoot()
                         }
                         composable<Routes.Search> {
-                            SearchCityScreen(
-                                navHostController = navController,
-                            )
+                            SearchCityScreen()
                         }
                     }
                 }

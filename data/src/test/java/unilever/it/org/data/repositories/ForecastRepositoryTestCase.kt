@@ -8,11 +8,9 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
-import unilever.it.org.domain.models.CurrentWeather
 import unilever.it.org.domain.models.Forecast
 import unilever.it.org.domain.models.NetworkError
 import unilever.it.org.domain.models.Result
-import unilever.it.org.repositories.CurrentWeatherRepoImpl
 import unilever.it.org.repositories.ForecastRepoImpl
 
 @RunWith(JUnit4::class)

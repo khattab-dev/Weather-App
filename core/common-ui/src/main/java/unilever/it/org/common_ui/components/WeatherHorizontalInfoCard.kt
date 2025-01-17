@@ -25,7 +25,7 @@ fun WeatherHorizontalInfoCard(
     title: String,
     value: String
 ) {
-    Card() {
+    Card {
         Row(
             modifier = Modifier
                 .padding(8.dp)

@@ -2,7 +2,6 @@ package unilever.it.org.data_source.network
 
 import android.util.Log
 import kotlinx.coroutines.ensureActive
-import retrofit2.HttpException
 import retrofit2.Response
 import unilever.it.org.domain.models.NetworkError
 import unilever.it.org.domain.models.Result
@@ -25,7 +24,7 @@ suspend inline fun <reified T> safeCall(
     return responseToResult(response)
 }
 
-suspend inline fun <reified T> responseToResult(
+inline fun <reified T> responseToResult(
     response: Response<T>
 ): Result<T?, NetworkError> {
     return when(response.code()) {

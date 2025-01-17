@@ -24,7 +24,7 @@ fun WeatherInfoCard(
     title: String,
     value: String
 ) {
-    Card() {
+    Card {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp),

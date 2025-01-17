@@ -49,7 +49,7 @@ class ForecastResponseMapperTestCase {
         dt = 1674019200,
         dtTxt = "2025-01-17 12:00:00",
         main = sampleMain,
-        pop = 0,
+        pop = 0.0,
         sys = sampleSys,
         visibility = 10000,
         weather = listOf(sampleWeatherDescription),

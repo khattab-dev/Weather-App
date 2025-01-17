@@ -6,6 +6,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 import unilever.it.org.common.Constants
 import unilever.it.org.common.getIconUrl
+import unilever.it.org.weather_formatter.getIconUrl
 
 @RunWith(JUnit4::class)
 class UtilsTestCase {

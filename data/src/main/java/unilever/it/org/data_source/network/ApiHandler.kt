@@ -1,5 +1,6 @@
 package unilever.it.org.data_source.network
 
+import android.util.Log
 import kotlinx.coroutines.ensureActive
 import retrofit2.HttpException
 import retrofit2.Response
@@ -16,6 +17,7 @@ suspend inline fun <reified T> safeCall(
     } catch (e: UnresolvedAddressException) {
         return Result.Error(NetworkError.NO_INTERNET)
     }  catch (e: Exception) {
+        Log.d("rabbit", "safeCall: ${e.stackTraceToString()}")
         coroutineContext.ensureActive()
         return Result.Error(NetworkError.UNKNOWN)
     }

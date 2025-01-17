@@ -37,23 +37,30 @@ publishing {
     publications.create<MavenPublication>("myPluginRelease") {
         groupId = "dev.khattab"
         artifactId = "weather-utils"
-        version = "1.0"
-        artifact("${layout.buildDirectory}/outputs/aar/weather-utils-1.0.aar")
+        version = "1.4"
+
+        artifact("${layout.buildDirectory.get()}/outputs/aar/weather_formatter-release.aar")
     }
 
     repositories {
         maven {
-            name = "github"
-            url = uri("https://maven.pkg.github.com/khattabdev/weather-utils")
+            name = "Weather-Utils"
+            url = uri("https://maven.pkg.github.com/khattab-dev/Weather-App")
+            credentials {
+                username = "khattab-dev"
+                password = "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"
+
+            }
+        }
     }
 }
 
-dependencies {
+    dependencies {
 
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-}
+        implementation(libs.androidx.core.ktx)
+        implementation(libs.androidx.appcompat)
+        implementation(libs.material)
+        testImplementation(libs.junit)
+        androidTestImplementation(libs.androidx.junit)
+        androidTestImplementation(libs.androidx.espresso.core)
+    }

@@ -1,4 +1,6 @@
-package unilever.it.org.common
+package unilever.it.org.weather_formatter
+
+private const val BASE_IMAGE_URL = "https://openweathermap.org/img/wn/"
 
 fun getIconUrl(weatherCode: Int, isDay: Boolean): String {
     val iconSuffix = when (weatherCode) {
@@ -15,7 +17,5 @@ fun getIconUrl(weatherCode: Int, isDay: Boolean): String {
         in 803..804 -> "04${if (isDay) "d" else "n"}" // Broken/Overcast Clouds
         else -> "01${if (isDay) "d" else "n"}"        // Default (Clear Sky)
     }
-    return "${Constants.BASE_IMAGE_URL}$iconSuffix@2x.png"
+    return "${BASE_IMAGE_URL}$iconSuffix@2x.png"
 }
-
-

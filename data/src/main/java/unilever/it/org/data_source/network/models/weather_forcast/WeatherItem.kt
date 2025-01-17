@@ -15,7 +15,7 @@ data class WeatherItem(
     @Json(name = "main")
     val main: Main?,
     @Json(name = "pop")
-    val pop: Int?,
+    val pop: Double?,
     @Json(name = "sys")
     val sys: Sys?,
     @Json(name = "visibility")

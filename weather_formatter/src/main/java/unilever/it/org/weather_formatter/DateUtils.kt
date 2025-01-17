@@ -1,4 +1,4 @@
-package unilever.it.org.common
+package unilever.it.org.weather_formatter
 
 import java.text.SimpleDateFormat
 import java.util.Locale

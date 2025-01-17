@@ -1,11 +1,11 @@
 package unilever.it.org.mappers
 
-import unilever.it.org.common.DateUtils.extractDate
-import unilever.it.org.common.DateUtils.getDayName
-import unilever.it.org.common.getIconUrl
+import unilever.it.org.weather_formatter.DateUtils.extractDate
+import unilever.it.org.weather_formatter.DateUtils.getDayName
 import unilever.it.org.data_source.network.models.weather_forcast.WeatherForecastResponse
 import unilever.it.org.data_source.network.models.weather_forcast.WeatherItem
 import unilever.it.org.domain.models.Forecast
+import unilever.it.org.weather_formatter.getIconUrl
 
 fun WeatherForecastResponse.toForecastList(): List<Forecast> {
     val forecastList = mutableListOf<Forecast>()

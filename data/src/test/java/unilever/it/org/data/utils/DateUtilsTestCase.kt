@@ -6,9 +6,9 @@ import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
-import unilever.it.org.common.DateUtils.extractDate
-import unilever.it.org.common.DateUtils.getDayName
-import unilever.it.org.common.DateUtils.isDayTime
+import unilever.it.org.weather_formatter.DateUtils.extractDate
+import unilever.it.org.weather_formatter.DateUtils.getDayName
+import unilever.it.org.weather_formatter.DateUtils.isDayTime
 
 @RunWith(JUnit4::class)
 class DateUtilsTestCase {

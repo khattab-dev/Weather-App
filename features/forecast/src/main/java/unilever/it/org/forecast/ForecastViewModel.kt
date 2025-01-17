@@ -42,7 +42,6 @@ class ForecastViewModel @Inject constructor(
             }
 
             getWeatherForecastUseCase.invoke(lat, lon).onSuccess {
-                Log.d("rabbit", "getForecastData: ${it?.size}")
                 _state.update { state ->
                     state.copy(forecasts = it)
                 }

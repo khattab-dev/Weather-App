@@ -1,7 +1,7 @@
 package unilever.it.org.mappers
 
+import unilever.it.org.common.DateUtils.isDayTime
 import unilever.it.org.common.getIconUrl
-import unilever.it.org.common.isDayTime
 import unilever.it.org.data_source.network.models.current_weather.CurrentWeatherResponse
 import unilever.it.org.domain.models.CurrentWeather
 

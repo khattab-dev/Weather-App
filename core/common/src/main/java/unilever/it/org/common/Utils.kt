@@ -1,9 +1,5 @@
 package unilever.it.org.common
 
-fun isDayTime(currentTime: Long, sunriseTime: Long, sunsetTime: Long): Boolean {
-    return currentTime in sunriseTime..sunsetTime
-}
-
 fun getIconUrl(weatherCode: Int, isDay: Boolean): String {
     val iconSuffix = when (weatherCode) {
         in 200..232 -> "11${if (isDay) "d" else "n"}" // Thunderstorm
@@ -21,4 +17,5 @@ fun getIconUrl(weatherCode: Int, isDay: Boolean): String {
     }
     return "${Constants.BASE_IMAGE_URL}$iconSuffix@2x.png"
 }
+
 

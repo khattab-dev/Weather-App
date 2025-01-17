@@ -26,7 +26,6 @@ fun CustomBottomAppBar(
 ) {
     BottomNavigation(
         Modifier.clip(RoundedCornerShape(8.dp)).navigationBarsPadding(),
-        MaterialTheme.colorScheme.secondary
     ) {
         NavBarItem.items.forEach { item ->
             BottomNavigationItem(

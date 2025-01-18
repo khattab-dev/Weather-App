@@ -102,12 +102,6 @@ private fun fetchLocationAndWeather(
             }
         }
         .addOnFailureListener { exception ->
-            Toast.makeText(
-                activity,
-                "Error fetching location: ${exception.localizedMessage}",
-                Toast.LENGTH_SHORT
-            ).show()
-
             onAction(ForecastActions.GetForecastData(null, null))
         }
 }

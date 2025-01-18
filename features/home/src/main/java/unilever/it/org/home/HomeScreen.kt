@@ -187,11 +187,6 @@ private fun fetchLocationAndWeather(activity: ComponentActivity, vm: HomeViewMod
             }
         }
         .addOnFailureListener { exception ->
-            Toast.makeText(
-                activity,
-                "Error fetching location: ${exception.localizedMessage}",
-                Toast.LENGTH_SHORT
-            ).show()
             vm.getWeatherData(null, null)
         }
 }

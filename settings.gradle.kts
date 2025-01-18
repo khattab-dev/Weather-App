@@ -21,7 +21,7 @@ dependencyResolutionManagement {
             url = uri("https://maven.pkg.github.com/khattab-dev/Weather-App")
             credentials {
                 username = "khattab-dev"
-                password = "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"
+                password = "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"
 
             }
         }

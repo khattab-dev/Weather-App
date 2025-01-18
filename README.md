@@ -5,7 +5,7 @@
   <img alt="Static Badge" src="https://img.shields.io/badge/Android-View-green?logo=android">
 </p>
 
-![image](https://github.com/user-attachments/assets/0aea523c-d36f-4b50-ad7f-9e54d0c52ce6)
+![Purple App Phone Mockup Sales Marketing Presentation](https://github.com/user-attachments/assets/f0cb2b6a-910c-491a-844d-75397d7abc5c)
 
 ## Weather App
 

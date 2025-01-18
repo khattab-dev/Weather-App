@@ -10,16 +10,24 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import unilever.it.org.domain.models.CurrentWeather
+import unilever.it.org.domain.models.Forecast
 import unilever.it.org.domain.models.onError
 import unilever.it.org.domain.models.onSuccess
 import unilever.it.org.domain.usecases.GetCurrentWeatherUseCase
+import unilever.it.org.domain.usecases.GetWeatherForecastUseCase
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val getCurrentWeatherUseCase: GetCurrentWeatherUseCase) :
+class HomeViewModel @Inject constructor(
+    private val getCurrentWeatherUseCase: GetCurrentWeatherUseCase,
+    private val getForecastUseCase: GetWeatherForecastUseCase
+) :
     ViewModel() {
     private val _currentWeather = MutableStateFlow<CurrentWeather?>(null)
     val currentWeather get() = _currentWeather.asStateFlow()
+
+    private val _forecast = MutableStateFlow<List<Forecast>>(emptyList())
+    val forecast get() = _forecast.asStateFlow()
 
     private val _loading = MutableStateFlow(false)
     val loading get() = _loading.asStateFlow()
@@ -27,17 +35,26 @@ class HomeViewModel @Inject constructor(private val getCurrentWeatherUseCase: Ge
     private val _error = Channel<String>()
     val error = _error.receiveAsFlow()
 
-    fun getCurrentWeather(lat: Double, lon: Double) =
-        viewModelScope.launch(Dispatchers.IO) {
-            _loading.value = true
-            val result = getCurrentWeatherUseCase(lat, lon)
+    fun getWeatherData(lat: Double, lon: Double) = viewModelScope.launch(Dispatchers.IO) {
+        getCurrentWeather(lat, lon)
+        getForecastData(lat, lon)
+    }
 
-            result.onSuccess {
-                _currentWeather.value = it
-            }.onError {
-                _error.send(it.toString())
-            }
+    private suspend fun getCurrentWeather(lat: Double, lon: Double) {
+        val result = getCurrentWeatherUseCase(lat, lon)
 
-            _loading.value = false
+        result.onSuccess {
+            _currentWeather.value = it
+        }.onError {
+            _error.send(it.toString())
         }
+    }
+
+    private suspend fun getForecastData(lat: Double?, lon: Double?) {
+        getForecastUseCase.invoke(lat, lon).onSuccess {
+            _forecast.value = it
+        }.onError {
+            _error.send(it.toString())
+        }
+    }
 }

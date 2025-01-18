@@ -9,12 +9,13 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -28,12 +29,13 @@ import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import com.google.android.gms.location.LocationServices
 import unilever.it.org.common_ui.components.CurrentWeatherCard
-import unilever.it.org.common_ui.components.WeatherHorizontalInfoCard
 import unilever.it.org.common_ui.components.WeatherInfoCard
+import unilever.it.org.home.components.ForecastCard
+import unilever.it.org.home.components.LocationDetailsCard
 
 
 @SuppressLint("MissingPermission")
-@OptIn(ExperimentalPermissionsApi::class)
+@OptIn(ExperimentalPermissionsApi::class, ExperimentalLayoutApi::class)
 @Composable
 fun HomeScreen(
     vm: HomeViewModel = hiltViewModel<HomeViewModel>()
@@ -53,7 +55,8 @@ fun HomeScreen(
         }
     }
 
-    val data = vm.currentWeather.collectAsStateWithLifecycle()
+    val currentWeatherData = vm.currentWeather.collectAsStateWithLifecycle()
+    val forecastData = vm.forecast.collectAsStateWithLifecycle()
     val loading = vm.loading.collectAsStateWithLifecycle()
 
     LaunchedEffect(coarseLocationPermissionState.status) {
@@ -82,59 +85,58 @@ fun HomeScreen(
         }
     }
 
-    data.value?.let {
-        LazyColumn(modifier = Modifier.fillMaxSize(),verticalArrangement = Arrangement.spacedBy(24.dp)) {
-            item {
-                CurrentWeatherCard(it)
+    currentWeatherData.value?.let { weather ->
+        LazyVerticalGrid(
+            verticalArrangement = Arrangement.spacedBy(24.dp),
+            horizontalArrangement = Arrangement.spacedBy(64.dp),
+            columns = GridCells.Fixed(2),
+        ) {
+            item(span = { GridItemSpan(maxLineSpan) }) {
+                LocationDetailsCard(currentWeather = currentWeatherData.value!!)
+            }
+
+            item(span = { GridItemSpan(maxLineSpan) }) {
+                CurrentWeatherCard(weather)
+            }
+
+            item(span = { GridItemSpan(maxLineSpan) }) {
+                HorizontalDivider()
             }
 
             item {
-                Row(
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier.fillMaxWidth()
-                ) {
-                    WeatherInfoCard(
-                        title = "Min Temp",
-                        icon = R.drawable.min_temp,
-                        value = it.minTemp.toString()
-                    )
-                    WeatherInfoCard(
-                        title = "Feels Like",
-                        icon =  R.drawable.feels_temp,
-                        value = it.feelsLike.toString()
-                    )
-                    WeatherInfoCard(
-                        title = "Max Temp",
-                        icon =  R.drawable.max_temp,
-                        value = it.maxTemp.toString()
-                    )
-                }
+                WeatherInfoCard(
+                    title = "Humidity",
+                    icon = R.drawable.humidity,
+                    value = "${weather.humidity}%"
+                )
             }
 
             item {
-                Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-                    WeatherHorizontalInfoCard(
-                        title = "Pressure",
-                        icon = R.drawable.pressure,
-                        value = it.pressure.toString()
-                    )
-                    WeatherHorizontalInfoCard(
-                        title = "Humidity",
-                        icon = R.drawable.humidity,
-                        value = it.minTemp.toString()
-                    )
-                    WeatherHorizontalInfoCard(
-                        title = "Wind Speed",
-                        icon = R.drawable.wind_speed,
-                        value = it.minTemp.toString()
-                    )
+                WeatherInfoCard(
+                    title = "Pressure",
+                    icon = R.drawable.pressure,
+                    value = weather.pressure.toString()
+                )
+            }
 
-                    WeatherHorizontalInfoCard(
-                        title = "Wind Degree",
-                        icon = R.drawable.wind_degree,
-                        value = it.windDegree.toString()
-                    )
-                }
+            item {
+                WeatherInfoCard(
+                    title = "Min Temp",
+                    icon = R.drawable.min_temp,
+                    value = "${weather.minTemp}°"
+                )
+            }
+
+            item {
+                WeatherInfoCard(
+                    title = "Max Temp",
+                    icon = R.drawable.max_temp,
+                    value = "${weather.maxTemp}°"
+                )
+            }
+
+            item(span = { GridItemSpan(maxLineSpan) }) {
+                ForecastCard(forecastData.value)
             }
         }
     }
@@ -146,7 +148,7 @@ private fun fetchLocationAndWeather(activity: ComponentActivity, vm: HomeViewMod
     fusedLocationClient.lastLocation
         .addOnSuccessListener { location ->
             if (location != null) {
-                vm.getCurrentWeather(location.latitude, location.longitude)
+                vm.getWeatherData(location.latitude, location.longitude)
             } else {
                 Toast.makeText(
                     activity,

@@ -1,8 +1,8 @@
 package unilever.it.org.mappers
 
-import unilever.it.org.weather_formatter.DateUtils.isDayTime
 import unilever.it.org.data_source.network.models.current_weather.CurrentWeatherResponse
 import unilever.it.org.domain.models.CurrentWeather
+import unilever.it.org.weather_formatter.DateUtils.isDayTime
 import unilever.it.org.weather_formatter.getIconUrl
 
 fun CurrentWeatherResponse.toCurrentWeather(): CurrentWeather {
@@ -24,6 +24,7 @@ fun CurrentWeatherResponse.toCurrentWeather(): CurrentWeather {
         humidity = main?.humidity ?: 0,
         windSpeed = wind?.speed ?: 0.0,
         windDegree = wind?.deg ?: 0.0,
-        cityName = name ?: ""
+        cityName = name ?: "",
+
     )
 }

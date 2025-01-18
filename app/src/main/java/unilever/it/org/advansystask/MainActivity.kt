@@ -22,7 +22,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
 import unilever.it.org.advansystask.components.CustomBottomAppBar
-import unilever.it.org.advansystask.ui.theme.AdvansysTaskTheme
+import unilever.it.org.advansystask.ui.theme.AppTheme
 import unilever.it.org.forecast.ForecastScreenRoot
 import unilever.it.org.home.HomeScreen
 import unilever.it.org.navigation.Routes
@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             var darkTheme by remember { mutableStateOf(false) }
 
-            AdvansysTaskTheme(darkTheme = darkTheme) {
+            AppTheme (darkTheme = darkTheme) {
                 val navController = rememberNavController()
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentDestination = navBackStackEntry?.destination
@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
                         startDestination = Routes.Home,
                         modifier = Modifier
                             .padding(innerPadding)
-                            .padding(16.dp)
+                            .padding(top = 16.dp, start = 16.dp, end = 16.dp)
                     ) {
                         composable<Routes.Home> {
                             HomeScreen()

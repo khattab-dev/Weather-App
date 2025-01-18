@@ -12,5 +12,5 @@ data class CurrentWeather(
     val pressure: Int,
     val humidity: Int,
     val windSpeed: Double,
-    val windDegree: Double
+    val windDegree: Double,
 )

@@ -3,9 +3,10 @@ package unilever.it.org.advansystask.components
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
+
 import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -23,11 +24,11 @@ fun CustomBottomAppBar(
     currentDestination: NavDestination?,
     navController: NavHostController
 ) {
-    BottomNavigation(
+    NavigationBar (
         Modifier.clip(RoundedCornerShape(8.dp)).navigationBarsPadding(),
     ) {
         NavBarItem.items.forEach { item ->
-            BottomNavigationItem(
+            NavigationBarItem(
                 selected = currentDestination?.hierarchy?.any { it.hasRoute(item.route::class) } == true,
                 onClick = {
                     navController.navigate(item.route) {

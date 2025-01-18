@@ -41,6 +41,7 @@ android {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":core:di"))
+    implementation(project(":core:common-ui"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

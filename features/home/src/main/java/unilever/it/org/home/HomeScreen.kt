@@ -21,19 +21,24 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import unilever.it.org.common_ui.components.CurrentWeatherCard
 import unilever.it.org.common_ui.components.ForecastCard
 import unilever.it.org.common_ui.components.LocationDetailsCard
 import unilever.it.org.common_ui.components.WeatherInfoCard
-
 
 
 @SuppressLint("MissingPermission")
@@ -42,7 +47,9 @@ import unilever.it.org.common_ui.components.WeatherInfoCard
 fun HomeScreen(
     vm: HomeViewModel = hiltViewModel<HomeViewModel>()
 ) {
+    val lifeCycleOwner = LocalLifecycleOwner.current
     val activity = LocalActivity.current as ComponentActivity
+    val context = LocalContext.current
     val coarseLocationPermissionState =
         rememberPermissionState(Manifest.permission.ACCESS_COARSE_LOCATION)
 
@@ -77,6 +84,20 @@ fun HomeScreen(
 
             else -> {
                 requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+            }
+        }
+    }
+
+    LaunchedEffect(lifeCycleOwner.lifecycle) {
+        lifeCycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+            withContext(Dispatchers.Main.immediate) {
+                vm.error.collect { error ->
+                    Toast.makeText(
+                        context,
+                        context.getString(unilever.it.org.common_ui.R.string.something_went_wrong_please_try_again_later),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
     }

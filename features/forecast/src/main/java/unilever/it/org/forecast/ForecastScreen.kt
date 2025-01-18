@@ -7,23 +7,20 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.isGranted
 import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import com.google.android.gms.location.LocationServices
-import unilever.it.org.forecast.components.ForecastInfoCard
+import unilever.it.org.common_ui.components.ForecastCard
 
 @OptIn(ExperimentalPermissionsApi::class)
 @Composable
@@ -72,9 +69,9 @@ fun ForecastScreen(
             CircularProgressIndicator()
         }
     } else {
-        LazyColumn(verticalArrangement = Arrangement.spacedBy(16.dp)) {
-            items(state.forecasts, key = { it.date }) {
-                ForecastInfoCard(forecast = it)
+        LazyColumn {
+            item {
+                ForecastCard(state.forecasts)
             }
         }
     }

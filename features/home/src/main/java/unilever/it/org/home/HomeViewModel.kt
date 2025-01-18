@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import unilever.it.org.domain.models.CurrentWeather
 import unilever.it.org.domain.models.Forecast
+import unilever.it.org.domain.models.NetworkError
 import unilever.it.org.domain.models.onError
 import unilever.it.org.domain.models.onSuccess
 import unilever.it.org.domain.usecases.GetCurrentWeatherUseCase
@@ -32,12 +33,14 @@ class HomeViewModel @Inject constructor(
     private val _loading = MutableStateFlow(false)
     val loading get() = _loading.asStateFlow()
 
-    private val _error = Channel<String>()
+    private val _error = Channel<NetworkError>()
     val error = _error.receiveAsFlow()
 
     fun getWeatherData(lat: Double, lon: Double) = viewModelScope.launch(Dispatchers.IO) {
+        _loading.value = true
         getCurrentWeather(lat, lon)
         getForecastData(lat, lon)
+        _loading.value = false
     }
 
     private suspend fun getCurrentWeather(lat: Double, lon: Double) {
@@ -46,7 +49,7 @@ class HomeViewModel @Inject constructor(
         result.onSuccess {
             _currentWeather.value = it
         }.onError {
-            _error.send(it.toString())
+            _error.send(it)
         }
     }
 
@@ -54,7 +57,7 @@ class HomeViewModel @Inject constructor(
         getForecastUseCase.invoke(lat, lon).onSuccess {
             _forecast.value = it
         }.onError {
-            _error.send(it.toString())
+            _error.send(it)
         }
     }
 }

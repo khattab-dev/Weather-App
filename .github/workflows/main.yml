@@ -32,12 +32,11 @@ jobs:
       
     - name: Build With Gradle
       run: ./gradlew build
-      if: success()
       env:
         GH_USERNAME: ${{ secrets.GH_USERNAME }}
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      if: success()
 
-      
     - name: Upload Apk
       uses: actions/upload-artifact@v4.6.0
       with:

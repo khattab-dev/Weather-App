@@ -29,6 +29,9 @@ jobs:
 
     - name: Run Unit Tests
       run: ./gradlew test
+      env: 
+        GH_USERNAME: ${{ secrets.GH_USERNAME }}
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
       
     - name: Build With Gradle
       run: ./gradlew build

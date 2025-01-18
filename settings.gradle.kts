@@ -14,16 +14,17 @@ pluginManagement {
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
+
         google()
         mavenCentral()
         maven {
             name = "Weather-Utils"
-            url = uri("https://maven.pkg.github.com/khattab-dev/Weather-App")
             credentials {
-                username = "khattab-dev"
-                password = "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"
-
+                username = System.getenv("GITHUB_USERNAME")
+                password = System.getenv("GITHUB_TOKEN")
             }
+            url = uri("https://maven.pkg.github.com/khattab-dev/Weather-App")
+
         }
     }
 }

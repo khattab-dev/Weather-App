@@ -17,9 +17,8 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4.2.2
-    - name: Debug environment variables
+    - name: Debug Environment Variables
       run: |
-        echo "GH_USERNAME: ${{ secrets.GH_USERNAME }}"
         echo "GH_USERNAME: ${GH_USERNAME}"
         echo "GH_TOKEN: ${GH_TOKEN:0:4}"
 

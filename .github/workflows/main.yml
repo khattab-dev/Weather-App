@@ -18,9 +18,9 @@ jobs:
       run: |
         echo "GH_USERNAME: ${GH_USERNAME:0:4}****"
         echo "GH_TOKEN: ${GH_TOKEN:0:4}****"
-  env:
-    GH_USERNAME: ${{ secrets.GH_USERNAME }}
-    GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      env:
+        GH_USERNAME: ${{ secrets.GH_USERNAME }}
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: Set up JDK
       uses: actions/setup-java@v4.6.0
       with:

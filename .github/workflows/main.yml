@@ -20,7 +20,7 @@ jobs:
     - name: Debug Environment Variables
       run: |
         echo "GH_USERNAME: ${GH_USERNAME}"
-        echo "GH_TOKEN: ${GH_TOKEN:0:4}"
+        echo "GH_TOKEN: ${GITHUB_TOKEN:0:4}"
 
     - name: Set up JDK
       uses: actions/setup-java@v4.6.0
@@ -29,9 +29,12 @@ jobs:
         distribution: 'corretto'
 
     - name: Run Unit Tests
+      env:
+        GH_USERNAME: ${{ secrets.GH_USERNAME }}
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        GITHUB_ACTOR: ${{ secrets.GITHUB_ACTOR }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
-        export GH_USERNAME=${{ secrets.GH_USERNAME }}
-        export GH_TOKEN=${{ secrets.GH_TOKEN }}
         ./gradlew test
       
     - name: Build With Gradle

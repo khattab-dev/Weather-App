@@ -18,6 +18,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -29,9 +30,10 @@ import com.google.accompanist.permissions.rememberPermissionState
 import com.google.accompanist.permissions.shouldShowRationale
 import com.google.android.gms.location.LocationServices
 import unilever.it.org.common_ui.components.CurrentWeatherCard
+import unilever.it.org.common_ui.components.ForecastCard
+import unilever.it.org.common_ui.components.LocationDetailsCard
 import unilever.it.org.common_ui.components.WeatherInfoCard
-import unilever.it.org.home.components.ForecastCard
-import unilever.it.org.home.components.LocationDetailsCard
+
 
 
 @SuppressLint("MissingPermission")
@@ -55,9 +57,9 @@ fun HomeScreen(
         }
     }
 
-    val currentWeatherData = vm.currentWeather.collectAsStateWithLifecycle()
-    val forecastData = vm.forecast.collectAsStateWithLifecycle()
-    val loading = vm.loading.collectAsStateWithLifecycle()
+    val currentWeatherData by vm.currentWeather.collectAsStateWithLifecycle()
+    val forecastData by vm.forecast.collectAsStateWithLifecycle()
+    val loading by vm.loading.collectAsStateWithLifecycle()
 
     LaunchedEffect(coarseLocationPermissionState.status) {
         when {
@@ -79,20 +81,20 @@ fun HomeScreen(
         }
     }
 
-    if (loading.value) {
+    if (loading) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
         }
     }
 
-    currentWeatherData.value?.let { weather ->
+    currentWeatherData?.let { weather ->
         LazyVerticalGrid(
             verticalArrangement = Arrangement.spacedBy(24.dp),
             horizontalArrangement = Arrangement.spacedBy(64.dp),
             columns = GridCells.Fixed(2),
         ) {
             item(span = { GridItemSpan(maxLineSpan) }) {
-                LocationDetailsCard(currentWeather = currentWeatherData.value!!)
+                LocationDetailsCard(currentWeather = weather)
             }
 
             item(span = { GridItemSpan(maxLineSpan) }) {
@@ -136,7 +138,7 @@ fun HomeScreen(
             }
 
             item(span = { GridItemSpan(maxLineSpan) }) {
-                ForecastCard(forecastData.value)
+                ForecastCard(forecastData)
             }
         }
     }

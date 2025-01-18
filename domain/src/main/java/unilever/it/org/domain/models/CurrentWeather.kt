@@ -2,6 +2,7 @@ package unilever.it.org.domain.models
 
 data class CurrentWeather(
     val cityName: String,
+    val date: String,
     val temp: Double,
     val iconUrl: String,
     val weatherStatus: String,

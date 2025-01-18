@@ -1,4 +1,4 @@
-package unilever.it.org.home.components
+package unilever.it.org.common_ui.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -18,7 +18,7 @@ fun LocationDetailsCard(currentWeather: CurrentWeather) {
         modifier = Modifier.wrapContentWidth()
     ) {
         Text(
-            "${currentWeather.cityName}, Saturday, 11 Sept",
+            "${currentWeather.cityName}, ${currentWeather.date}",
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
             fontSize = 12.sp
         )

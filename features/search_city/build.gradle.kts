@@ -70,4 +70,6 @@ dependencies {
     implementation(libs.hilt.navigation.compose)
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
+
+    implementation(libs.lottie.compose)
 }

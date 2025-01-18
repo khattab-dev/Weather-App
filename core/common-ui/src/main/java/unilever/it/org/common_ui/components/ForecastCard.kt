@@ -1,4 +1,4 @@
-package unilever.it.org.home.components
+package unilever.it.org.common_ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

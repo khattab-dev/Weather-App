@@ -4,6 +4,9 @@ import unilever.it.org.data_source.network.models.current_weather.CurrentWeather
 import unilever.it.org.domain.models.CurrentWeather
 import unilever.it.org.weather_formatter.DateUtils.isDayTime
 import unilever.it.org.weather_formatter.getIconUrl
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 fun CurrentWeatherResponse.toCurrentWeather(): CurrentWeather {
     val isDay = isDayTime(
@@ -25,6 +28,17 @@ fun CurrentWeatherResponse.toCurrentWeather(): CurrentWeather {
         windSpeed = wind?.speed ?: 0.0,
         windDegree = wind?.deg ?: 0.0,
         cityName = name ?: "",
+        date = formatTimestamp(dt ?: 0L),
 
     )
+}
+
+fun formatTimestamp(timestamp: Long): String {
+    val date = Date(timestamp * 1000)  // Convert seconds to milliseconds
+
+    // Define the desired format
+    val formatter = SimpleDateFormat("EEEE, dd MMM", Locale.getDefault())
+
+    // Format the date
+    return formatter.format(date)
 }

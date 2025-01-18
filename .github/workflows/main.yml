@@ -12,9 +12,6 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Debug environment variables
-      run: echo "GH_USERNAME=${{ secrets.GH_USERNAME }}" && echo "GH_TOKEN=${{ secrets.GH_TOKEN }}"
-
     - name: Checkout Repository
       uses: actions/checkout@v4.2.2
       
@@ -29,9 +26,6 @@ jobs:
       
     - name: Build With Gradle
       run: ./gradlew build
-      env:
-        GH_USERNAME: ${{ secrets.GH_USERNAME }}
-        GH_TOKEN: ${{ secrets.GH_TOKEN }}
       if: success() 
       
     - name: Upload Apk

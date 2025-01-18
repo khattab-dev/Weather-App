@@ -20,7 +20,6 @@ jobs:
     - name: Debug environment variables
       run: |
         echo "GH_USERNAME: ${{ secrets.GH_USERNAME }}"
-        echo "GH_USERNAME: ${{ GH_USERNAME }}"
         echo "GH_USERNAME: ${GH_USERNAME}"
         echo "GH_TOKEN: ${GH_TOKEN:0:4}"
       env:

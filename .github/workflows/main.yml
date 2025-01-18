@@ -14,9 +14,13 @@ jobs:
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4.2.2
-    - name: Verify Secrets 
-      run: | 
-        echo "GH_USERNAME: ${GH_USERNAME:0:4}****" echo "GH_TOKEN: ${GH_TOKEN:0:4}****"
+    - name: Debug environment variables
+      run: |
+        echo "GH_USERNAME: ${GH_USERNAME:0:4}****"
+        echo "GH_TOKEN: ${GH_TOKEN:0:4}****"
+  env:
+    GH_USERNAME: ${{ secrets.GH_USERNAME }}
+    GH_TOKEN: ${{ secrets.GH_TOKEN }}
     - name: Set up JDK
       uses: actions/setup-java@v4.6.0
       with:

@@ -17,11 +17,12 @@ dependencyResolutionManagement {
 
         google()
         mavenCentral()
+
         maven {
             name = "Weather-Utils"
             credentials {
-                username = System.getenv("GH_USERNAME")
-                password = System.getenv("GH_TOKEN")
+                username = "khattab-dev"
+                password = "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"
             }
             url = uri("https://maven.pkg.github.com/khattab-dev/Weather-App")
 

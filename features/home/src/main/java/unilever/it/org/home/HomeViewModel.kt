@@ -36,14 +36,14 @@ class HomeViewModel @Inject constructor(
     private val _error = Channel<NetworkError>()
     val error = _error.receiveAsFlow()
 
-    fun getWeatherData(lat: Double, lon: Double) = viewModelScope.launch(Dispatchers.IO) {
+    fun getWeatherData(lat: Double?, lon: Double?) = viewModelScope.launch(Dispatchers.IO) {
         _loading.value = true
         getCurrentWeather(lat, lon)
         getForecastData(lat, lon)
         _loading.value = false
     }
 
-    private suspend fun getCurrentWeather(lat: Double, lon: Double) {
+    private suspend fun getCurrentWeather(lat: Double?, lon: Double?) {
         val result = getCurrentWeatherUseCase(lat, lon)
 
         result.onSuccess {

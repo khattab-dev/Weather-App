@@ -40,6 +40,8 @@ fun ForecastScreen(
         } else {
             Toast.makeText(activity, "Permission denied. Cannot fetch weather.", Toast.LENGTH_SHORT)
                 .show()
+
+            fetchLocationAndWeather(activity, onAction)
         }
     }
 
@@ -55,6 +57,8 @@ fun ForecastScreen(
                     "Please allow location access to fetch weather.",
                     Toast.LENGTH_SHORT
                 ).show()
+
+                fetchLocationAndWeather(activity, onAction)
             }
 
             else -> {
@@ -93,6 +97,8 @@ private fun fetchLocationAndWeather(
                     "Unable to fetch location. Try again later.",
                     Toast.LENGTH_SHORT
                 ).show()
+
+                onAction(ForecastActions.GetForecastData(null, null))
             }
         }
         .addOnFailureListener { exception ->
@@ -101,5 +107,7 @@ private fun fetchLocationAndWeather(
                 "Error fetching location: ${exception.localizedMessage}",
                 Toast.LENGTH_SHORT
             ).show()
+
+            onAction(ForecastActions.GetForecastData(null, null))
         }
 }

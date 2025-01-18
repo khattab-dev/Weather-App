@@ -61,6 +61,8 @@ fun HomeScreen(
         } else {
             Toast.makeText(activity, "Permission denied. Cannot fetch weather.", Toast.LENGTH_SHORT)
                 .show()
+
+            fetchLocationAndWeather(activity, vm)
         }
     }
 
@@ -80,6 +82,8 @@ fun HomeScreen(
                     "Please allow location access to fetch weather.",
                     Toast.LENGTH_SHORT
                 ).show()
+
+                fetchLocationAndWeather(activity, vm)
             }
 
             else -> {
@@ -178,6 +182,8 @@ private fun fetchLocationAndWeather(activity: ComponentActivity, vm: HomeViewMod
                     "Unable to fetch location. Try again later.",
                     Toast.LENGTH_SHORT
                 ).show()
+
+                vm.getWeatherData(null, null)
             }
         }
         .addOnFailureListener { exception ->
@@ -186,5 +192,6 @@ private fun fetchLocationAndWeather(activity: ComponentActivity, vm: HomeViewMod
                 "Error fetching location: ${exception.localizedMessage}",
                 Toast.LENGTH_SHORT
             ).show()
+            vm.getWeatherData(null, null)
         }
 }

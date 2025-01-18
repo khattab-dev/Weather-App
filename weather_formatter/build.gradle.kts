@@ -47,8 +47,8 @@ publishing {
             name = "Weather-Utils"
             url = uri("https://maven.pkg.github.com/khattab-dev/Weather-App")
             credentials {
-                username = System.getenv("GITHUB_USERNAME")
-                password = System.getenv("GITHUB_TOKEN")
+                username = System.getenv("GH_USERNAME")
+                password = System.getenv("GH_TOKEN")
             }
         }
     }

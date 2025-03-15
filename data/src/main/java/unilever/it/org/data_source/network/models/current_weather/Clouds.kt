@@ -1,11 +1,9 @@
 package unilever.it.org.data_source.network.models.current_weather
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class Clouds(
-    @Json(name = "all")
-    val all: Int?
+    val all: Int
 )

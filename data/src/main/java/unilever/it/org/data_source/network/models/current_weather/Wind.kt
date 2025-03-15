@@ -1,13 +1,11 @@
 package unilever.it.org.data_source.network.models.current_weather
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class Wind(
-    @Json(name = "deg")
-    val deg: Double?,
-    @Json(name = "speed")
-    val speed: Double?
+    val deg: Double,
+    val gust: Double,
+    val speed: Double
 )

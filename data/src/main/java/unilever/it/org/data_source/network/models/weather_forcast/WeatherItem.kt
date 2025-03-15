@@ -1,27 +1,18 @@
 package unilever.it.org.data_source.network.models.weather_forcast
 
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
-
-@JsonClass(generateAdapter = true)
+@Serializable
 data class WeatherItem(
-    @Json(name = "clouds")
     val clouds: Clouds?,
-    @Json(name = "dt")
     val dt: Long?,
-    @Json(name = "dt_txt")
-    val dtTxt: String?,
-    @Json(name = "main")
+    @SerialName(value = "dt_txt")
+    val dtTxt: String,
     val main: Main?,
-    @Json(name = "pop")
     val pop: Double?,
-    @Json(name = "sys")
     val sys: Sys?,
-    @Json(name = "visibility")
     val visibility: Int?,
-    @Json(name = "weather")
     val weather: List<Weather?>?,
-    @Json(name = "wind")
     val wind: Wind?
 )

@@ -10,25 +10,25 @@ import java.util.Locale
 
 fun CurrentWeatherResponse.toCurrentWeather(): CurrentWeather {
     val isDay = isDayTime(
-        currentTime = dt ?: 0L,
-        sunriseTime = sys?.sunrise ?: 0L,
-        sunsetTime = sys?.sunset ?: 0L
+        currentTime = dt,
+        sunriseTime = sys.sunrise,
+        sunsetTime = sys.sunset
     )
 
     return CurrentWeather(
         isDay = isDay,
-        iconUrl = getIconUrl(isDay = isDay, weatherCode = weather?.first()?.id ?: 0),
-        temp = main?.temp ?: 0.0,
-        weatherStatus = weather?.first()?.main ?: "",
-        feelsLike = main?.feelsLike ?: 0.0,
-        maxTemp = main?.tempMax ?: 0.0,
-        minTemp = main?.tempMin ?: 0.0,
-        pressure = main?.pressure ?: 0,
-        humidity = main?.humidity ?: 0,
-        windSpeed = wind?.speed ?: 0.0,
-        windDegree = wind?.deg ?: 0.0,
-        cityName = name ?: "",
-        date = formatTimestamp(dt ?: 0L),
+        iconUrl = getIconUrl(isDay = isDay, weatherCode = weather.first().id),
+        temp = main.temp,
+        weatherStatus = weather.first().main,
+        feelsLike = main.feelsLike,
+        maxTemp = main.tempMax,
+        minTemp = main.tempMin,
+        pressure = main.pressure,
+        humidity = main.humidity,
+        windSpeed = wind.speed,
+        windDegree = wind.deg,
+        cityName = name,
+        date = formatTimestamp(dt),
 
     )
 }

@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -55,12 +56,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(libs.retrofit.core)
-    implementation(libs.retrofit.convertor)
-    implementation(libs.moshi.core)
-    implementation(libs.logging.interceptor)
-    implementation(libs.okhttp)
-    ksp(libs.moshi.kotlin.codegen)
+    implementation(libs.bundles.ktor)
+
 
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)

@@ -30,14 +30,12 @@ class WeatherResponseMapperTestCase {
     private val sampleSys = Sys(
         sunrise = 1673815890, sunset = 1673862890,
         country = "EG",
-        id = 41,
-        type = 1
     )
     private val clouds = Clouds(
         all = 4
     )
     private val coords = Coord(1.4,12.2)
-    private val sampleWind = Wind(speed = 5.0, deg = 90.0)
+    private val sampleWind = Wind(speed = 5.0, deg = 90.0, gust = 2.2)
     private val sampleCurrentWeatherResponse = CurrentWeatherResponse(
         dt = 1674019200,
         sys = sampleSys,

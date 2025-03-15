@@ -1,11 +1,9 @@
 package unilever.it.org.data_source.network.models.weather_forcast
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class Sys(
-    @Json(name = "pod")
     val pod: String?
 )

@@ -48,12 +48,7 @@ dependencies {
     implementation(libs.hilt.core)
     ksp(libs.hilt.compiler)
 
-    implementation(libs.retrofit.core)
-    implementation(libs.retrofit.convertor)
-    implementation(libs.moshi.core)
-    implementation(libs.logging.interceptor)
-    implementation(libs.okhttp)
-    ksp(libs.moshi.kotlin.codegen)
+    implementation(libs.bundles.ktor)
 
     implementation(libs.androidx.room.runtime)
 }

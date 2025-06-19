@@ -15,7 +15,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object LocalModule {
     @Provides
-    @Singleton
+    @Singleton 
     fun provideDatabase(@ApplicationContext context: Context): WeatherDatabase {
         return Room.databaseBuilder(
             context,

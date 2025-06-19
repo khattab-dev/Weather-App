@@ -11,6 +11,7 @@ import unilever.it.org.data_source.local.dao.SearchDao
 import unilever.it.org.data_source.local.database.WeatherDatabase
 import javax.inject.Singleton
 
+
 @Module
 @InstallIn(SingletonComponent::class)
 object LocalModule {
